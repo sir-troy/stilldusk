@@ -3,7 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Stilldusk — Focus Timer</title>
+<title>Stilldusk — Calm Focus Timer for Deep Work</title>
+<meta name="description" content="A calm, dusk-coloured focus timer for deep work. Focus sessions and breaks with soundscapes, atmospheres, clock faces and Zen mode. Free, no sign-up, and your settings stay on your device.">
+<meta property="og:title" content="Stilldusk — Calm Focus Timer for Deep Work">
+<meta property="og:description" content="A calm, dusk-coloured focus timer for deep work. Focus sessions and breaks with soundscapes, atmospheres, clock faces and Zen mode. Free, no sign-up, and your settings stay on your device.">
+<meta property="og:url" content="https://stilldusk.useful-indeed.com/">
+<meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500&family=Outfit:wght@200;300;400;500;600&family=JetBrains+Mono:wght@200;400&family=Silkscreen&family=Comfortaa:wght@300;500&display=swap" rel="stylesheet">
 <style>
@@ -16,10 +21,10 @@
 html,body{height:100%}
 body{font-family:Outfit,system-ui,sans-serif;color:var(--fg);
   background:radial-gradient(1200px 800px at 70% -10%,var(--bg2),var(--bg1) 60%);
-  overflow:hidden;transition:background .8s,color .5s;-webkit-font-smoothing:antialiased}
+  background-attachment:fixed;overflow-x:hidden;overflow-y:auto;transition:background .8s,color .5s;-webkit-font-smoothing:antialiased}
 button{font:inherit}
 canvas#sky{position:fixed;inset:0;z-index:0}
-.app{position:relative;z-index:1;height:100%;display:flex;flex-direction:column;align-items:center;padding:22px 18px 22px}
+.app{position:relative;z-index:1;height:100%;min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;align-items:center;padding:22px 18px 22px}
 header{width:100%;max-width:880px;display:flex;justify-content:space-between;align-items:center;gap:12px}
 .logo{display:flex;align-items:center;gap:10px;font-weight:500;letter-spacing:.18em;font-size:13px;text-transform:uppercase}
 .logo i{width:12px;height:12px;border-radius:50%;background:var(--accent);box-shadow:0 0 14px 3px var(--accent)}
@@ -160,7 +165,28 @@ body.zen .task{border-color:transparent}
 <link rel="canonical" href="https://stilldusk.useful-indeed.com/">
 <link rel="icon" type="image/svg+xml" href="logo.svg">
 <link rel="apple-touch-icon" href="logo.svg">
-<style id="useful-indeed-mobile">.logo .ui-applogo{width:24px;height:24px;border-radius:7px;display:block;box-shadow:0 0 16px rgba(165,148,255,.45)}/* site fixes */body.zen .ui-foot-toggle{opacity:0;pointer-events:none}.ui-foot--float{--ui-panel:rgba(18,22,52,.9)}.ui-foot-toggle{--ui-panel:rgba(18,22,52,.55)}</style>
+<style id="useful-indeed-mobile">.logo .ui-applogo{width:24px;height:24px;border-radius:7px;display:block;box-shadow:0 0 16px rgba(165,148,255,.45)}/* site fixes */body.zen .ui-foot-toggle{opacity:0;pointer-events:none}.ui-foot--float{--ui-panel:rgba(18,22,52,.9)}.ui-foot-toggle{--ui-panel:rgba(18,22,52,.55)}
+/* guide below the timer */
+.more{position:absolute;left:50%;bottom:4px;transform:translateX(-50%);font-size:12px;color:var(--muted);text-decoration:none;opacity:.7;letter-spacing:.04em;z-index:1;transition:opacity .3s}
+.more:hover{opacity:1;color:var(--fg)}
+body.zen .more,body.scrolled .more{opacity:0;pointer-events:none}
+body.scrolled .keys{opacity:0;pointer-events:none;transition:opacity .3s}
+.guide{position:relative;z-index:1;max-width:760px;margin:0 auto;padding:40px 22px 110px;line-height:1.65}
+.guide h2{font-family:Fraunces,Georgia,serif;font-weight:300;font-size:clamp(28px,4.5vw,40px);letter-spacing:-.01em;margin-bottom:10px}
+.guide h3{font-family:Fraunces,Georgia,serif;font-weight:500;font-size:21px;margin:34px 0 10px}
+.guide p,.guide li{color:var(--muted);font-size:16px}
+.guide p b,.guide li b{color:var(--fg);font-weight:500}
+.guide ol,.guide ul{padding-left:22px;display:grid;gap:6px}
+.guide .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:6px}
+.guide .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px 16px;backdrop-filter:blur(10px)}
+.guide .card b{display:block;color:var(--fg);font-weight:500;margin-bottom:4px}
+.guide .card span{color:var(--muted);font-size:14.5px}
+.guide kbd{font-family:'JetBrains Mono',monospace;font-size:12.5px;border:1px solid var(--line);border-radius:6px;padding:1px 6px;color:var(--fg)}
+.guide details{border-top:1px solid var(--line);padding:12px 0}
+.guide summary{cursor:pointer;color:var(--fg);font-weight:500}
+.guide details p{margin-top:6px}
+body.zen .guide{opacity:.25;transition:opacity .6s}
+</style>
 </head>
 <body>
 <canvas id="sky"></canvas>
@@ -219,6 +245,7 @@ body.zen .task{border-color:transparent}
       <button class="ib" id="skip" title="Skip (S)"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 18l8.5-6L6 6v12zm10-12v12h2V6h-2z"/></svg></button>
     </div>
   </main>
+  <a class="more" href="#guide">How it works ↓</a>
 
   <div class="dock">
     <button id="bSound"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg><span class="t">Sounds</span><i class="live"></i></button>
@@ -288,6 +315,46 @@ body.zen .task{border-color:transparent}
 <div class="toast" id="toast"></div>
 <div class="keys"><kbd>Space</kbd> start · <kbd>R</kbd> reset · <kbd>S</kbd> skip · <kbd>Z</kbd> zen · <kbd>↑↓</kbd> time</div>
 <div class="copy" hidden style="display:none!important">© <span id="yr">2026</span> Stilldusk · All rights reserved</div>
+<section class="guide" id="guide">
+  <h2>A calm focus timer for deep work</h2>
+  <p>Stilldusk helps you work in focused blocks with short rests in between. It's a quiet, good-looking timer that stays out of your way: no account and nothing to install. Your settings and today's session count stay in your browser.</p>
+
+  <h3>How to use it</h3>
+  <ol>
+    <li><b>Pick a mode:</b> Focus, Short break or Long break.</li>
+    <li><b>Set the time</b> by dragging around the ring like a kitchen timer, scrolling over it, or pressing the up and down arrow keys.</li>
+    <li><b>Write what you're working on</b> in the box under the timer, if you like. It shows in the browser tab while the timer runs.</li>
+    <li><b>Press play</b> (or <kbd>Space</kbd>) and work until the chime. Then take your break.</li>
+  </ol>
+
+  <h3>The focus rhythm</h3>
+  <p>By default, Stilldusk uses a classic rhythm: <b>25 minutes of focus, then a 5-minute short break</b>. After every <b>4 focus sessions</b>, you get a longer <b>15-minute break</b>. Short, timed sessions make it easier to start a hard task, and regular breaks help you keep your energy for the whole day. You can change every length in <b>Rhythm</b>, and turn on <b>Auto-start</b> to move from one phase to the next on its own.</p>
+
+  <h3>Make it yours</h3>
+  <div class="cards">
+    <div class="card"><b>Sounds</b><span>Mix soundscape layers, generated live in your browser. Choose to play them only while you focus.</span></div>
+    <div class="card"><b>Theme</b><span>Twenty moving skies, a custom glow colour, particles and a breathing dial that paces your breath.</span></div>
+    <div class="card"><b>Clock</b><span>Change the dial, digits, ring weight, size, minute ticks and glow.</span></div>
+    <div class="card"><b>Zen</b><span>Hide everything except the timer, so nothing pulls your attention away.</span></div>
+  </div>
+
+  <h3>Keyboard shortcuts</h3>
+  <p><kbd>Space</kbd> start or pause · <kbd>R</kbd> reset · <kbd>S</kbd> skip to the next phase · <kbd>Z</kbd> Zen mode · <kbd>↑</kbd> <kbd>↓</kbd> change the time before you start.</p>
+
+  <h3>Tips for a good session</h3>
+  <ul>
+    <li>Decide on one task before you press play, and write it down.</li>
+    <li>Put your phone face down or in another room.</li>
+    <li>Use breaks to stand up, stretch or drink water, not to check messages.</li>
+    <li>If 25 minutes feels too long, start with 15 and work up.</li>
+  </ul>
+
+  <h3>Questions</h3>
+  <details><summary>Can I see the time while I'm in another tab?</summary><p>Yes. While the timer runs, the time left is shown in the browser tab title.</p></details>
+  <details><summary>Will it keep running if I switch tabs?</summary><p>Yes. Keep the Stilldusk tab open and the timer keeps counting in the background.</p></details>
+  <details><summary>Is my data saved anywhere?</summary><p>Only on your device. Your settings and today's sessions are kept in your browser's local storage and never sent to a server.</p></details>
+  <details><summary>Does it work on my phone?</summary><p>Yes. Stilldusk works in any modern browser on phones, tablets and computers.</p></details>
+</section>
 
 <script>
 /* ---------- storage ---------- */
@@ -504,7 +571,7 @@ function render(){
   const left=leftNow();
   $('time').textContent=fmt(left);setDial(clamp(fracOf(left),0,1));
   const task=$('task').value.trim();
-  document.title=running?`${fmt(left)} · ${mode==='focus'?(task||'Focus'):LABEL[mode]}`:'Stilldusk — Focus Timer';
+  document.title=running?`${fmt(left)} · ${mode==='focus'?(task||'Focus'):LABEL[mode]}`:'Stilldusk — Calm Focus Timer for Deep Work';
   $('phase').textContent=running?(mode==='focus'?'Deep focus':'Breathe & rest'):(left<total-.5?'Paused':(mode==='focus'?'Ready to focus':LABEL[mode]));
   $('playIcon').innerHTML=running?'<path d="M7 5h4v14H7zM13 5h4v14h-4z"/>':'<path d="M8 5v14l11-7z"/>';
   $('dial').classList.toggle('idle',!running);
@@ -701,5 +768,9 @@ applyTheme();applyClock();renderStats();syncSteppers();setMode('focus');requestA
   </div>
 </footer>
 <script src="useful-indeed/badge.js" defer></script>
+<script>
+(function(){var b=document.body;function f(){b.classList.toggle('scrolled',(b.scrollTop||document.documentElement.scrollTop)>40)}b.addEventListener('scroll',f,{passive:true});window.addEventListener('scroll',f,{passive:true});
+document.querySelectorAll('a.more').forEach(function(a){a.addEventListener('click',function(e){e.preventDefault();document.getElementById('guide').scrollIntoView({behavior:'smooth'})})})})();
+</script>
 </body>
 </html>
