@@ -257,10 +257,10 @@ body.zen .guide{opacity:.25;transition:opacity .6s}
   <a class="more" href="#guide">How it works ↓</a>
 
   <div class="dock">
-    <button id="bSound"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg><span class="t">Sounds</span><i class="live"></i></button>
-    <button id="bTheme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 0 0 18z" fill="currentColor"/></svg><span class="t">Theme</span></button>
-    <button id="bClock"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2.5M9 2h6"/></svg><span class="t">Clock</span></button>
-    <button id="bSet"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12"/><circle cx="16" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="18" cy="18" r="2"/></svg><span class="t">Rhythm</span></button>
+    <button id="bSound" aria-label="Sounds"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg><span class="t">Sounds</span><i class="live"></i></button>
+    <button id="bTheme" aria-label="Theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 0 0 18z" fill="currentColor"/></svg><span class="t">Theme</span></button>
+    <button id="bClock" aria-label="Clock face"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2.5M9 2h6"/></svg><span class="t">Clock</span></button>
+    <button id="bSet" aria-label="Settings"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12"/><circle cx="16" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="18" cy="18" r="2"/></svg><span class="t">Rhythm</span></button>
     <button id="bZen" title="Zen mode (Z)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg><span class="t">Zen</span></button>
   </div>
 </div>
@@ -269,8 +269,8 @@ body.zen .guide{opacity:.25;transition:opacity .6s}
   <h3>Soundscape</h3>
   <p class="sub">Mix any layers. Everything is generated live in your browser.</p>
   <div class="snd" id="sndGrid"></div>
-  <div class="row"><label>Volume</label><input type="range" id="vol" min="0" max="1" step="0.01" value="0.6"></div>
-  <div class="row"><label>Play only while focusing<small>Pause sounds on breaks and when paused</small></label><button class="switch" id="swOnlyFocus"></button></div>
+  <div class="row"><label>Volume</label><input type="range" id="vol" aria-label="Volume" min="0" max="1" step="0.01" value="0.6"></div>
+  <div class="row"><label>Play only while focusing<small>Pause sounds on breaks and when paused</small></label><button class="switch" id="swOnlyFocus" aria-label="Pause sounds on breaks and when paused"></button></div>
 </div>
 
 <div class="panel" id="pTheme">
@@ -279,9 +279,9 @@ body.zen .guide{opacity:.25;transition:opacity .6s}
   <div class="grid" id="themeGrid"></div>
   <h4>Fine-tune</h4>
   <div class="row" style="border-top:0"><label>Custom accent<small>Override the theme's glow colour</small></label>
-    <div style="display:flex;gap:8px;align-items:center"><input type="color" id="accentPick"><button class="btn-text" id="accentReset">Reset</button></div></div>
-  <div class="row"><label>Particles</label><input type="range" id="density" min="0" max="2" step="0.1" value="1"></div>
-  <div class="row"><label>Breathing dial<small>Gentle 8-second pulse to pace your breath</small></label><button class="switch" id="swBreath"></button></div>
+    <div style="display:flex;gap:8px;align-items:center"><input type="color" id="accentPick" aria-label="Accent colour"><button class="btn-text" id="accentReset">Reset</button></div></div>
+  <div class="row"><label>Particles</label><input type="range" id="density" aria-label="Particle density" min="0" max="2" step="0.1" value="1"></div>
+  <div class="row"><label>Breathing dial<small>Gentle 8-second pulse to pace your breath</small></label><button class="switch" id="swBreath" aria-label="Breathing pulse"></button></div>
 </div>
 
 <div class="panel" id="pClock">
@@ -292,11 +292,11 @@ body.zen .guide{opacity:.25;transition:opacity .6s}
   <h4>Digits</h4>
   <div class="fonts" id="fontOpts"></div>
   <h4>Details</h4>
-  <div class="row" style="border-top:0"><label>Ring weight</label><input type="range" id="thick" min="2" max="14" step="1"></div>
-  <div class="row"><label>Dial size</label><input type="range" id="dsize" min="0.75" max="1.25" step="0.01"></div>
-  <div class="row"><label>Digit size</label><input type="range" id="tsize" min="0.7" max="1.3" step="0.01"></div>
-  <div class="row"><label>Minute ticks</label><button class="switch" id="swTicks"></button></div>
-  <div class="row"><label>Glow</label><button class="switch" id="swGlow"></button></div>
+  <div class="row" style="border-top:0"><label>Ring weight</label><input type="range" id="thick" aria-label="Ring thickness" min="2" max="14" step="1"></div>
+  <div class="row"><label>Dial size</label><input type="range" id="dsize" aria-label="Dial size" min="0.75" max="1.25" step="0.01"></div>
+  <div class="row"><label>Digit size</label><input type="range" id="tsize" aria-label="Time size" min="0.7" max="1.3" step="0.01"></div>
+  <div class="row"><label>Minute ticks</label><button class="switch" id="swTicks" aria-label="Show ticks"></button></div>
+  <div class="row"><label>Glow</label><button class="switch" id="swGlow" aria-label="Glow"></button></div>
 </div>
 
 <div class="panel" id="pSet">
@@ -312,8 +312,8 @@ body.zen .guide{opacity:.25;transition:opacity .6s}
   <div class="row"><label>Long break</label><div class="step" data-k="long"></div></div>
   <div class="row"><label>Long break after<small>focus sessions</small></label><div class="step" data-k="every"></div></div>
   <h4>Flow</h4>
-  <div class="row" style="border-top:0"><label>Auto-start next phase</label><button class="switch" id="swAuto"></button></div>
-  <div class="row"><label>Chime when done</label><button class="switch" id="swChime"></button></div>
+  <div class="row" style="border-top:0"><label>Auto-start next phase</label><button class="switch" id="swAuto" aria-label="Auto-start next phase"></button></div>
+  <div class="row"><label>Chime when done</label><button class="switch" id="swChime" aria-label="Chime at the end"></button></div>
   <div class="row"><label>Today's stats</label><button class="btn-text" id="clearStats">Clear</button></div>
 </div>
 
